@@ -45,23 +45,31 @@ var flight = {
 
 获取对象里包含的值：
 1、用[]后缀中括住一个字符串表达式的方式
+
 `stooge["first-name"] // "pang"`
+
 2、用`.`表示法(优先考虑使用)
+
 `flight.departure.IATA // "SYD"`
 
 尝试检索一个不存在的成员属性的值，将返回undefined
 
 `stooge['middle-name'] // undefined`
+
 `flight.status // undefined`
 
 `||` 运算符可以用来填充默认值
+
 `var middle = stooge['middle-name'] || "(none)"`
+
 `var status = flight.status || "unknown"`
 
 尝试从undefined的成员属性中取值将会导致`TypeError`异常。可以通过`&&`来避免错误
 
 `flight.equipment // undefined` 
+
 `flight.equipment.model // throw "TypeError"`
+
 `flight.equipment && flight.equipment.model // undefined`
 
 ### 更新
