@@ -44,6 +44,7 @@ var flight = {
 ### 检索
 
 获取对象里包含的值：
+
 1、用[]后缀中括住一个字符串表达式的方式
 
 `stooge["first-name"] // "pang"`
