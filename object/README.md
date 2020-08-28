@@ -13,7 +13,7 @@ javascript包含一种原型链的特性，允许对象继承另一个对象的�
 
 对象字面量提供了一种非常方便地创建新对象值的表示法。一个对象字面量就是包围在一对花括号中的零或多个“名/值”对。
 
-```
+``` javascript
 var empty_object = {};
 var stooge = {
     "first-name": "pang",
@@ -24,7 +24,7 @@ var stooge = {
 
 属性的值可以从包括另一个对象字面量在内的任意表达式中获取，对象可嵌套
 
-```
+``` javascript
 var flight = {
     airline: "Oceanic",
     number: 815,
@@ -76,7 +76,7 @@ var flight = {
 ### 更新
 
 对象中的值可以通过赋值语句来更新。如果属性名已经存在在对象里，那么这个属性的值会被替换。
-```
+``` javascript
 stooge['first-name'] = "Lester";
 stooge.nickname = "Curly";
 flight.equipment = {
@@ -88,7 +88,8 @@ flight.status = "overdue";
 ### 引用
 
 对象通过引用来传递。
-```
+
+``` javascript
 var x = stooge;
 x.nickname = 'Curly';
 var nick = stooge.nickname;
@@ -106,7 +107,7 @@ a = b = c = {};
 
 当创建一个新对象时，可以选择莫个对象作为它的原型。使用`Object.create()`来创建一个使用原对象作为其原型的新对象。
 
-```
+``` javascript
 if (typeof Object.beget !== 'function') {
     Object.create = function (o) {
         var F = function () {};
@@ -118,7 +119,7 @@ var another_stooge = Object.create(stoogle);
 ```
 
 原型连接在更新时是不起作用的。不会触及该对象的原型:
-```
+``` javascript
 another_stooge['first-name'] = "xiao";
 another_stooge['middle-name'] = "ma";
 another_stooge.nickname = 'ze';
@@ -131,7 +132,7 @@ another_stooge.nickname = 'ze';
 
 检查对象并确定对象有什么属性是很容易的事情，只有试着去检索该属性并验证取得的值。`typeof`操作符对确定属性的类型很有帮助：
 
-```
+``` javascript
 typeof flight.number // 'number'
 typeof flight.status // 'string'
 typeof flight.arrival // 'object'
@@ -146,7 +147,8 @@ typeof flight.constructor // 'function'
 
 第一种让你的程序做检查并丢弃值为函数的属性。
 第二种使用`hasOwnProperty`方法，`hasOwnProperty`方法不会检查原型链
-```
+
+``` javascript
 flight.hasOwnProperty('number'); // true
 flight.hasOwnProperty('constructor'); // false
 ```
@@ -154,7 +156,8 @@ flight.hasOwnProperty('constructor'); // false
 ### 枚举
 
 for in 语句可用来遍历一个对象中所有的属性名。该枚举过程会列出所有的属性--包括函数和你可能不关心的原型中的属性--所以有必要过滤掉那些你不想要的值。最为常用的过滤器是`hasOwnProperty`方法，以及使用`typeof`来排除函数:
-```
+
+``` javascript
 var name;
 for (name in another_stooge) {
     if (typeof another_stooge[name] !== 'function') {
@@ -162,8 +165,10 @@ for (name in another_stooge) {
     }
 }
 ```
+
 属性名出现的顺序是不确定的，以此要对任何可能出现的顺序有所准备。如果你想要确保属性以特定的顺序出现，最好的办法就是完全避免使用`for in`语句，而是创建一个数组。
-```
+
+``` javascript
 var i;
 var properties = [
     'first-name',
@@ -184,7 +189,7 @@ for (i = 0; i < properties.length; i += 1) {
 
 删除对象的属性可能会让来自原型链中的属性透现出来
 
-```
+``` javascript
 another_stooge.nickname;  // 'Moe'
 // 删除another_stooge的nickname属性，从而暴露出原型的nickname 属性。
 delete another_stooge.nickname;
@@ -198,7 +203,7 @@ Javascript可以很随意地定义全局变量来容纳你的应用的所有资�
 
 最小化使用全局变量的方法之一是为你的应用只创建一个**唯一**的全局变量：
 
-```
+``` javascript
 var MYAPP = {};
 MYAPP.stooge = {
     "first-name": 'joe',

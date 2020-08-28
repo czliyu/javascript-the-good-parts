@@ -5,7 +5,7 @@
 **标识符**由一个字母开头，其后可选择性地加上一个或多个字母、数字或下画线。标识符不能
 使用下面的这些保留字：
 
-```
+``` javascript
 abstract
 boolean  break   byte
 case  catch  char  class  const   continue
@@ -56,7 +56,7 @@ Infinity表示所有大于1.79769313486231570e+308的值。
 
 （for in 语句）会枚举一个对象的所有属性名（或健名）。在每次循环中，object的下一个属性名字符串赋值给variable。
 
-```
+``` javascript
 for (myvar in obj) {
     if (obj.hasOwnProperty(myvar))
 }

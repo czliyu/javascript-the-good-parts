@@ -5,7 +5,8 @@ javascript的许多特性都借鉴自其他语言。语法借鉴`Java`,函数借
 **正则表达式**是一门简单语言的语法规范。它应用在一些方法中，对字符串的信息实现查找、替换和提取操作。
 
 可处理正则表达式的方法有：
-```
+
+``` javascript
 regexp.exec
 regexp.test
 string.match
@@ -19,7 +20,7 @@ string.split
 
 用来匹配URL的正则表达式。
 
-```
+``` javascript
 var parse_url = /^(?:([A-Za-z]+):)?(\/{0,3})([0-9.\-A-Za-z]+)(?::(\d+))?(?:\/([^?#]*))?(?:\?([^#]*))?(?:#(.*))?$/;
 
 var url = "http://www.ora.com:80/goodparts?q#fragment";
@@ -66,7 +67,7 @@ for (i = 0; i < names.length; i += 1) {
 一个匹配数字的正则表达式。数字可能由一个整数部分加上一个可选的负号、一个可选的小数
 部分和一个可选的指数部分组成。
 
-```
+``` javascript
 var parse_number = /^-?\d+(?:\.\d*)?(?:e[+\-]?\d+)?$/i;
 
 var test = function (num) {
@@ -92,7 +93,7 @@ test('123.45D-67'); // false
 
 创建一个正则表达式的另一个方法是使用`RegExp`构造器。这个构造器接收一个字符串。
 
-```
+``` javascript
 // 创建一个匹配Javascript字符串的正则表达式
 var my_regexp = new RegExp("\"(?:\\\\.|[^\\\\\\\\"])*\"", 'g');
 ```
@@ -108,7 +109,7 @@ RegExp对象的属性
 
 
 用正则表达式字面量创建RegExp对象共享同一个实例
-```
+``` javascript
 function make_a_matcher() {
     return /a/gi;
 };

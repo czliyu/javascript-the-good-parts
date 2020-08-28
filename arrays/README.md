@@ -7,7 +7,7 @@
 
 数组字面量提供了一种非常方便地创建新数组的表示法。一个数组字面量是在一对方括号中包围零个或多个逗号分隔的值的表达式。
 
-```
+``` javascript
 var empty = [];
 
 var numbers = [
@@ -27,7 +27,7 @@ numbers.length // 10
 
 对象字面量：
 
-```
+``` javascript
 var numbers_object = {
     '0': 'zero', '1': 'one', '2': 'two',
     '3': 'three', '4': 'four', '5': 'five',
@@ -54,7 +54,7 @@ mumbers.splice(2, 1);
 
 ### 枚举
 
-```
+``` javascript
 var i;
 for (i = 0; i < myArray.length; i += 1) {
     document.writeln(myAarray[i]);
@@ -63,7 +63,7 @@ for (i = 0; i < myArray.length; i += 1) {
 
 ### 方法
 
-```
+``` javascript
 // 扩展Function
 
 Function.prototype.method = function (name, func) {
@@ -84,8 +84,8 @@ Array.method('reduce', function (f, value) {
 ```
 
 调用`reduce`方法。
-
-```
+ 
+``` javascript
 var data = [4, 8, 15, 16, 23, 42];
 
 var add = function (a, b) {
@@ -103,7 +103,7 @@ var product = data.reduce(mult, 1); // 741880
 
 因为数组是对象，可以直接给一个单独的数组添加方法
 
-```
+``` javascript
 data.total = function () {
     return this.reduce(add, 0);
 };
@@ -118,7 +118,7 @@ javascript的数组不会预置值。
 
 javascript 应该提供一些类似`Array.dim`这样的方法来做这件事情。
 
-```
+``` javascript
 Array.dim = function (dimension, initial) {
     var a = [], i;
 
@@ -132,7 +132,8 @@ var myArray = Array.dim(10, 0);
 ```
 
 初始化多维数组。
-```
+
+``` javascript
 Array.matrix = function (m, n, initial) {
     var a, i, j, mat = [];
 

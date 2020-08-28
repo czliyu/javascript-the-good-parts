@@ -10,7 +10,7 @@ JavaScript 包含了一套小型的可用在标准类型上的标准方法集。
 它包含一份array的浅复制并把一个或多个参数`item`附加在其后，\
 `item`是一个数组
 
-```
+``` javascript
 var a = ['a', 'b', 'c'];
 var b = ['x', 'y', 'z'];
 
@@ -24,7 +24,7 @@ var c = a.concat(b, true); // ['a', 'b', 'c', 'x', 'y', 'z', true]
 接着用一个`separator`分隔符把它们连接在一起。\
 `separator` 默认是','
 
-```
+``` javascript
 var a = ['a', 'b', 'c'];
 
 var c = a.join(''); // 'abc'
@@ -35,14 +35,15 @@ var c = a.join(''); // 'abc'
 `pop`方法移除array中的最后一个元素并返回该元素
 如果array为empty，它返回`undefined`
 
-```
+``` javascript
 var a = ['a', 'b', 'c'];
 
 var c = a.pop(); // ['a', 'b']
 ```
 
 pop 扩展
-```
+
+``` javascript
 Array.method('pop', function () {
     return this.splice(this.length - 1, 1)[0];
 });
@@ -54,7 +55,7 @@ Array.method('pop', function () {
 和`concat`不同的是，它会修改array \
 如果`item`是数组，会作为单个元素添加到数组中
 
-```
+``` javascript
 var a = ['a', 'b', 'c'];
 
 var b = ['x', 'y', 'z'];
@@ -65,7 +66,8 @@ var c = a.push(b, true);
 ```
 
 push 扩展
-```
+
+``` javascript
 Array.method('push', function () {
     this.splice.apply(this, [this.length, 0].concat(Array.prototype.slice.apply(arguments)));
     return this.length;
@@ -76,7 +78,7 @@ Array.method('push', function () {
 
 `reverse`方法反转array中的元素顺序，并返回array本身
 
-```
+``` javascript
 var a = ['a', 'b', 'c'];
 
 var b = a.reverse();
@@ -86,14 +88,15 @@ var b = a.reverse();
 
 `shift`方法移除数组array中的第一个元素并返回该元素
 
-```
+``` javascript
 var a = ['a', 'b', 'c'];
 
 var c = a.shift(); // a = ['b', 'c']; c = 'a';
 ```
 
 shift扩展
-```
+
+``` javascript
 Array.method('shift', function () {
     return this.splice(0, 1)[0];
 });
@@ -105,7 +108,7 @@ Array.method('shift', function () {
 `start`: array[start]开始\
 `end`: 默认是`array.length`
 
-```
+``` javascript
 var a = ['a', 'b', 'c'];
 
 var b = a.slice(0, 1);  // b = ['a']
@@ -117,7 +120,7 @@ var d = a.slice(1, 2); // d = ['b']
 
 `sort`方法对array中的内容进行排序。
 
-```
+``` javascript
 var n = [4, 8, 15, 16, 23, 42];
 
 n.sort(); // n = [15, 16, 23, 4, 42, 8]
@@ -131,7 +134,7 @@ n.sort(); // n = [15, 16, 23, 4, 42, 8]
 `a < b retun -1` \
 `a > b return 1`
 
-```
+``` javascript
 n.sort(function (a, b) {
     return a - b;
 });
@@ -139,7 +142,7 @@ n.sort(function (a, b) {
 
 如果想要给任何包含简单值的数组排序。
 
-```
+``` javascript
 var m = ['aa', 'bb', 'a', 4, 8, 15, 16, 23, 42];
 
 m.sort(function (a, b) {
@@ -154,7 +157,8 @@ m.sort(function (a, b) {
 ```
 
 一个构造比较函数的函数：
-```
+
+``` javascript
 var by = function (name) {
     return function (o, p) {
         var a, b;
@@ -199,7 +203,7 @@ console.log(sort_s);
 `deleteCount`: 要移除的元素的个数。\
 `item`: 会插入到被移除元素的位置上
 
-```
+``` javascript
 var a = ['a', 'b', 'c'];
 
 var r = a.splice(1, 1, 'ache', 'bug');
@@ -208,7 +212,8 @@ var r = a.splice(1, 1, 'ache', 'bug');
 ```
 
 splice 扩展:
-```
+
+``` javascript
 Array.method('splice', function (start, deleteCount) {
     var max = Math.max,
         min = Math.min,
@@ -267,14 +272,15 @@ Array.method('splice', function (start, deleteCount) {
 
 `unshift`方法把`item`插入到array的开始部分。返回新的length
 
-```
+``` javascript
 var a = ['a', 'b', 'c'];
 
 var r = a.unshift('?', '@');
 ```
 
 unshift 扩展
-```
+
+``` javascript
 Array.method('unshift', function () {
     this.splice.apply(this, [0, 0].concat(Array.prototype.slice.apply(arguments)));
     return this.length;
@@ -288,7 +294,7 @@ Array.method('unshift', function () {
 
 `apply`方法调用function，传递一个会被绑定到this上的对象和一个可选的数组作为参数。
 
-```
+``` javascript
 Function.method('bind', function (that) {
     var method = this,
         slice = Array.prototype.slice,
@@ -355,14 +361,15 @@ console.log(x());
 
 `charAt`方法返回在string中pos位置的字符。
 
-```
+``` javascript
 var name = 'Curly';
 
 var initial = name.charAt(0); // 'C'
 ```
 
 charAt扩展
-```
+
+``` javascript
 String.method('charAt', function (pos) {
     return this.slice(pos, pos + 1);
 });
@@ -374,7 +381,7 @@ String.method('charAt', function (pos) {
 
 如果`pos`小于0或大于等于`string.length`, 返回`NaN`
 
-```
+``` javascript
 var name = 'Curly';
 
 var initial = name.charCodeAt(0); // 67
@@ -390,7 +397,7 @@ var initial = name.charCodeAt(0); // 67
 如果找到，返回第1个匹配字符的位置，否则返回-1。\
 `position`从string的某个指定位置开始查找
 
-```
+``` javascript
 var text = 'Mississippi';
 
 var p = text.indexOf('ss');
@@ -405,7 +412,7 @@ p = text.indexOf('ss', 6);
 如果 `string` == `that`, 结果为0 \
 如果 `sring` > `that`, 结果1
 
-```
+``` javascript
 var m = ['AAA', 'A', 'aa', 'a', 'Aa', 'aaa'];
 
 m.sort(function (a, b) {
@@ -417,7 +424,7 @@ m.sort(function (a, b) {
 
 `match` 方法让字符串和一个正则表达式进行匹配。
 
-```
+``` javascript
 var text = '<html><body bgcolor=linen><p>' +
            'This is <b>bold<\/b><\/p><\/body><\/html>';
 
@@ -440,7 +447,7 @@ for (i = 0; i < a.length; i += 1) {
 
 `search`和`indexOf`方法类似，只是接受一个正则表达式对象作为参数而不是一个字符串。返回第1个匹配的首字符位置，没有找到匹配，返回-1。
 
-```
+``` javascript
 var text = 'and in it he says "Any damn fool could';
 
 var pos = text.search(/["']/); // pos = 18
@@ -452,7 +459,7 @@ var pos = text.search(/["']/); // pos = 18
 `start`为负数， 它将与string.length相加。\
 `end`可选参数，默认是string.length, 如果是负数，将与string.length 相加
 
-```
+``` javascript
 var text = 'and in it he says " Any damn fool could';
 
 var a = text.slice(18);
@@ -465,14 +472,14 @@ var b = text.slice(0, 3);
 `split`方法把这个string分割成片段来创建一个字符串数组。
 `limit`可以限制被分割的片段数量。separator参数可以是一个字符串或一个正则表达式
 
-```
+``` javascript
 var digits = '0123456789';
 
 var a = digits.split('', 5);
 
 ```
 
-```
+``` javascript
 // array.split
 console.log('0123456789'.split('', 5));
 
@@ -510,6 +517,6 @@ console.log('last, first ,middle'.split(/\s*(,)\s*/));
 
 `String.fromCharCode` 函数根据一串数字编码返回一个字符串。
 
-```
+``` javascript
 var s = String.fromCharCode(67, 97, 116); // 'Cat'
 ```

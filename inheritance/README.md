@@ -10,7 +10,7 @@ javascript的原型存在着诸多矛盾。它的某些复杂的语言看起来�
 
 当采用构造器调用模式，取用`new`前缀调用一个函数时，函数执行的方式会被修改。
 
-```
+``` javascript
 // method 方法看函数扩展
 Function.method('new', function() {
     // 创建一个新对象，它继承自构造器函数的原型对象
@@ -45,7 +45,8 @@ document.writeln(name, " ",myMammal.says());
 ```
 
 构造另一个伪类来继承Mammal，通过定义它的`constructor`函数并替换它的`prototype`为一个Mammal的实例实现：
-```
+
+``` javascript
 var Cat = function (name) {
     this.name = name;
     this.saying = 'meow'
@@ -80,7 +81,7 @@ document.writeln(says, '\n', purr, '\n', name);
 ```
 让它看上去更像面向对象，我们可以隐藏一些细节。通过使用method方法定义一个`inherits`方法实现
 
-```
+``` javascript
 Function.method('inherits', function (Parent) {
     this.prototype = new Parent();
     return this;
@@ -113,7 +114,7 @@ var Cat = function (name) {
 
 先用对象字面量构造一个有用的对象：
 
-```
+``` javascript
 var myMammal = {
     name: 'Herb the Mammal',
     get_name: function () {
@@ -164,7 +165,7 @@ document.writeln(myCat.get_name());
 
 4、 返回那个新对象
 
-```
+``` javascript
 var constructor = function (spec, my) {
     var that, **其他的私有实例变量**;
 
@@ -184,7 +185,7 @@ var constructor = function (spec, my) {
 
 `my`: 对象是一个为继承链中的构造器提供秘密共享的容器。my对象可以选择性的使用。
 
-```
+``` javascript
 var mammal = function (spec) {
 
     var that = {};
@@ -204,7 +205,7 @@ var myMammal = mammal({name: 'Herb'});
 
 在伪类模式中，构造器函数Cat不得不重复Mammal已经完成的工作。在函数化模式中那不再需要，因为构造器Cat将会调用构造器Mammal，让Mammal在做对象创建中的大部分工作，所有Cat只能关注自身的差异即可。
 
-```
+``` javascript
 var cat = function (spec) {
     spec.saying = spec.saying || 'meow';
 
@@ -231,7 +232,7 @@ var myCat = cat({name: 'Henrietta'});
 
 函数化模式还给我们提供了一个处理父类方法的方法。构造一个`superior`方法，它取得一个方法名并返回调用那个方法的函数。
 
-```
+``` javascript
 Object.method('superior', function (name) {
     var that = this, method = that[name];
 

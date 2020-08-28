@@ -8,7 +8,7 @@ Javascript中的函数就是对象。对象是“名/值”对的集合并拥有
 
 ### 函数字面量
 
-```
+``` javascript
 // 创建一个名为add的变量，并用来把两个数字相加的函数赋值给它
 var add = function (a, b) {
     return a + b;
@@ -25,7 +25,8 @@ var add = function (a, b) {
 ### 方法调用模式
 
 当函数被保存为对象的一个属性时，我们称它为一个方法。
-```
+
+``` javascript
 // 创建myObject对象
 // increment 方法接受一个可选参数，如果参数不是数字，那么默认使用数字1
 
@@ -52,7 +53,7 @@ document.writeln(myObject.value); // 3
 
 > 调用函数时，`this`被绑定到全局对象，这是语言的设计上的一个错误。倘若语言设计正确，那么当内部函数调用时，this应该仍然绑定到外部函数的this变量。这个设计错误的后果就是方法不能利用内部函数来帮助它工作，因为内部函数的`this`被绑定了错误的值，所以不能共享该方法对对象的访问权。幸运的是，有一个很容易的解决方案，如果该方法定义一个变量并给它赋值为`this`,那么内部函数可以通过那个变量访问到this。按照规定，把那个变量命名为`that`
 
-```
+``` javascript
 myObject.double = function () {
     var that = this;
     var helper = function () {
@@ -72,7 +73,7 @@ Javascript是一门基于原型继承的语言。这意味着对象可以直接�
 
 如果在一个函数前面带上`new`来调用，那么背地里将会创建一个连接到该函数的`prototype`成员的新对象，同时`this`会被绑定到那个新对象上。
 
-```
+``` javascript
 // 创建一个名为Quo的构造器函数，带有status属性的对象
 var Quo = function (string) {
     this.status = string;
@@ -99,7 +100,7 @@ Apply调用模式
 `apply`方法让我们构造一个参数数组传递给调用函数。它也允许我们选择this的值。
 `apply`方法接收两个参数，第一个绑定给`this`的值，第二个参数数组。
 
-```
+``` javascript
 var array = [3, 4];
 var sum = add.apply(null, array);
 
@@ -115,7 +116,7 @@ var status = Quo.prototype.get_status.apply(statusObject); // 'A-Ok'
 
 `arguments` 数组。函数通过次参数访问所有它被调用时传递给它的参数列表，包括那些没有被分配给函数声明时定义的形式参数的多余参数，这使得编写一个无须指定参数个数的函数称为可能。
 
-```
+``` javascript
 var sum = function () {
     var i, sum = 0;
     for (i = 0; i < arguments.length; i += 1) {
@@ -131,7 +132,7 @@ document.writeln(sum(4, 8, 15, 16, 23, 42));
 
 异常处理机制,异常是干扰程序的正常流程的不寻常。
 
-```
+``` javascript
 var add = function (a, b) {
     if (typeof a !==  'number' || typeof b !== 'number') {
         throw {
@@ -160,7 +161,7 @@ try_it();
 
 JavaScript 允许给语言的基础类型扩充功能，通过`Object.prototype`添加方法，可以让该方法对所有对象都可用。
 
-```
+``` javascript
 Function.prototype.method = function (name, func) {
     this.prototype[name] = func;
     return this;
@@ -168,10 +169,10 @@ Function.prototype.method = function (name, func) {
 ```
 给`Function.prototype`增加一个method方法，所有`function`通过`method`来增加函数。
 
-```
+``` javascript
 // 通过给Number.prototype增加一个`integer`方法来改善它。
 Number.method('integer', function () {
-    return Math[this < 0 ? 'cell' : 'floor'](this);
+    return Math[this < 0 ? 'ceil' : 'floor'](this);
 });
 
 document.writeln((-10/3).integer());
@@ -184,7 +185,7 @@ document.writeln((-10/3).integer());
 浏览器端的文档对象模型（DOM）,每次递归调用时处理指定树的一小段。
 
 
-```
+``` javascript
 // 定义walk_the_DOM函数，它从莫个指定的节点开始，按HTML源码中的顺序访问该树的每个节点
 // 它会调用一个函数，并依次传递每个节点给它，
 
@@ -225,7 +226,7 @@ document.writeln(getElementsByAttribute('href', '#')):
 javascript当前没有提供尾递归优化，深度递归的函数可能会因为堆栈溢出而运行失败。
 **尾递归**是一种在函数的最后执行递归调用语句的特殊形式的递归。
 
-```
+``` javascript
 // 构造一个带尾递归的函数，因为它会返回自身调用的结果，所以塔是尾递归
 
 
@@ -244,7 +245,7 @@ document.writeln(factorial(4));
 
 作用域控制着变量与参数的可见性及生命周期。
 
-```
+``` javascript
 var foo = function () {
     var a = 3, b = 5;
 
@@ -268,7 +269,7 @@ var foo = function () {
 
 发起异步请求，提供一个当服务器的相应达到随时即触发的回调函数，异步函数立即返回。这样客户端就不会被阻塞。
 
-```
+``` javascript
 request = prepare_the_request();
 send_request_asynchronously(request, function (response) {
     display(response)
@@ -282,7 +283,7 @@ send_request_asynchronously(request, function (response) {
 想要给`String`增加一个`deentityify`方法。寻找字符串中的HTML字符实体并把它们替换为对应的字符。
 理想的方式是把它放入一个闭包中，而且也许还能提供一个增加更多字符实体的扩展方法：
 
-```
+``` javascript
 String.method('deentityify', function () {
     // 字符实体表，映射字符实体
     var entity = {
@@ -312,7 +313,7 @@ document.writeln('&lt;&quot;&gt;'.deentityify( ));
 
 利用模块模式构造一个用于产生序列号的对象：
 
-```
+``` javascript
 var serial_maker = function () {
     var prefix = '';
     var seq = 0;
@@ -345,7 +346,7 @@ var unique = seqer.gensym();
 
 有些方法没有返回值。例如。一些设置或修改对象的某个状态却不返回任何值的方法就是典型的例子。如果我们让这些方法返回`this`而不是`undefined`,就可以启用级联。
 
-```
+``` javascript
 // 一个启用级联的Ajax类库可能允许我们这样的形式去编码
 getElement('myBoxDiv')
     .move(350, 150)
@@ -377,7 +378,7 @@ getElement('myBoxDiv')
 
 在一个名为memo的数组中保存我们的存储结果，存储结果可以隐藏在闭包中。当函数被调用时，首先检查结果是否已经存在
 
-```
+``` javascript
 var fibonacci = function () {
 
     // 存储计算结果
@@ -397,7 +398,7 @@ var fibonacci = function () {
 
 编写一个函数来帮助我们构造带记忆功能的函数。`memoizer`函数获取一个初始的memo数组和formula函数。返回一个管理memo存储和在需要时调用formula函数的recur函数。
 
-```
+``` javascript
 var memoizer = function (memo, formula) {
     var recur = function (n) {
         var result = memo[n];
