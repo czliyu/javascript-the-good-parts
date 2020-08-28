@@ -108,9 +108,9 @@ a = b = c = {};
 
 ```
 if (typeof Object.beget !== 'function') {
-    Object.create = function (0) {
+    Object.create = function (o) {
         var F = function () {};
-        F.prototype = 0;
+        F.prototype = o;
         return new F();
     };
 }
